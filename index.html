@@ -1,0 +1,278 @@
+import React, { useState } from 'react';
+
+const App = () => {
+  // State to manage the current slide index
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [romanticMessageInput, setRomanticMessageInput] = useState(''); // This state is no longer used but kept to avoid breaking context
+  const [generatedRomanticMessage, setGeneratedRomanticMessage] = useState(''); // This state is no longer used but kept to avoid breaking context
+  const [isLoadingMessage, setIsLoadingMessage] = useState(false); // This state is no longer used but kept to avoid breaking context
+  const [messageError, setMessageError] = useState(''); // This state is no longer used but kept to avoid breaking context
+
+  // Function to generate a romantic message using Gemini API (no longer used in this version)
+  const generateRomanticMessage = async () => {
+    // This function is no longer called in this version as slide 7 is removed.
+    // It's kept here for context if the feature needs to be re-added later.
+  };
+
+  // Array of slides (each section is a slide)
+  const slides = [
+    // Slide 1: Introduction
+    <section key="slide-1" className="w-full max-w-4xl bg-white rounded-3xl shadow-xl p-6 sm:p-10 transform transition-transform duration-500 hover:scale-105">
+      <div className="text-center">
+        <h1 className="text-5xl sm:text-6xl font-bold text-red-600 mb-6 font-display animate-fade-in">
+          Um Convite Especial para a Minha Momolada
+        </h1>
+        <p className="text-lg sm:text-xl text-gray-700 mb-8 leading-relaxed">
+          Para a minha momolada, <span className="font-semibold text-pink-600">Na</span>,
+        </p>
+        <p className="text-md sm:text-lg text-gray-600 mb-8 leading-relaxed">
+          Neste Dia dos Namorados, quero celebrar a beleza do nosso amor, a cumplicidade que nos une e a alegria de ter você ao meu lado. Cada sorriso, cada abraço e cada momento compartilhado são tesouros que guardo com carinho.
+        </p>
+        <p className="text-md sm:text-lg text-gray-600 mb-10 leading-relaxed">
+          Preparei esta pequena homenagem para nós, um lembrete do quanto você é especial e do quanto nossa história é linda. Que seja um dia repleto de carinho, risadas e memórias inesquecíveis.
+        </p>
+        <p className="text-xl sm:text-2xl font-semibold text-pink-700 font-handwriting">
+          Com todo o meu amor,
+        </p>
+        <p className="text-2xl sm:text-3xl font-bold text-red-500 mt-2 font-handwriting">
+          Leo
+        </p>
+      </div>
+      {/* Imagem para a Página 1 */}
+      <div className="mt-10 flex flex-col items-center justify-center">
+        <img
+          src="https://i.postimg.cc/T12BGm6F/1.jpg"
+          alt="Onde tudo começou, só nós e o Huguinho"
+          className="rounded-xl shadow-lg w-full max-w-lg object-cover h-auto animate-zoom-in"
+          onError={(e) => { e.target.onerror = null; e.target.src = 'https://placehold.co/600x400/FFD1DC/FF69B4?text=Sua+Foto+Aqui'; }}
+        />
+        <p className="mt-4 text-sm sm:text-base text-gray-500 italic">
+          Onde tudo começou, só nós e o Huguinho
+        </p>
+      </div>
+    </section>,
+
+    // Slide 2: A Magia do Nosso Encontro
+    <section key="slide-2" className="w-full max-w-4xl bg-white rounded-3xl shadow-xl p-6 sm:p-10 transform transition-transform duration-500 hover:scale-105">
+      <div className="text-center">
+        <h2 className="text-4xl sm:text-5xl font-bold text-red-600 mb-6 font-display animate-fade-in">
+          A Magia do Nosso Encontro
+        </h2>
+        <p className="text-lg sm:text-xl text-gray-700 mb-8 leading-relaxed">
+          Hoje, o palco da nossa celebração será um espaço onde o amor floresce, ao som dos latidos.
+        </p>
+        <p className="text-md sm:text-lg text-gray-600 mb-10 leading-relaxed">
+          Desde os pequenos gestos de carinho até as grandes aventuras, cada experiência ao seu lado se torna inesquecível.
+        </p>
+      </div>
+      {/* Elementos decorativos */}
+      <div className="flex justify-around items-center my-8">
+        <svg className="w-16 h-16 text-pink-500 animate-bounce" fill="currentColor" viewBox="0 0 20 20">
+          <path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd"></path>
+        </svg>
+        <svg className="w-20 h-20 text-red-400 animate-pulse" fill="currentColor" viewBox="0 0 20 20">
+          <path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd"></path>
+        </svg>
+        <svg className="w-16 h-16 text-pink-500 animate-bounce" fill="currentColor" viewBox="0 0 20 20">
+          <path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd"></path>
+        </svg>
+      </div>
+      {/* Placeholder para imagem */}
+      <div className="mt-10 flex justify-center">
+        <img
+          src="https://i.postimg.cc/PJfMVnsn/4.jpg"
+          alt="Cenário Romântico"
+          className="rounded-xl shadow-lg w-full max-w-lg object-cover h-auto animate-zoom-in"
+          onError={(e) => { e.target.onerror = null; e.target.src = 'https://placehold.co/600x400/D1F0E0/64BFA4?text=Cenário+Romântico'; }}
+        />
+      </div>
+    </section>,
+
+    // Slide 3: Um Brinde ao Nosso Amor e ao Sabor!
+    <section key="slide-3" className="w-full max-w-4xl bg-white rounded-3xl shadow-xl p-6 sm:p-10 transform transition-transform duration-500 hover:scale-105">
+      <div className="text-center">
+        <h2 className="text-4xl sm:text-5xl font-bold text-red-600 mb-6 font-display animate-fade-in">
+          Um Brinde ao Nosso Amor e ao Sabor!
+        </h2>
+        <p className="text-lg sm:text-xl text-gray-700 mb-8 leading-relaxed">
+          Para tornar este dia ainda mais especial, preparei um menu pensado para aguçar os sentidos e celebrar o paladar. Cada prato foi escolhido com carinho, esperando encantar você a cada garfada.
+        </p>
+        <h3 className="text-3xl sm:text-4xl font-bold text-pink-700 mt-10 mb-6 font-display">
+          Nosso Menu Exclusivo de Dia dos Namorados
+        </h3>
+      </div>
+      {/* Divisor decorativo */}
+      <div className="border-t-2 border-dashed border-pink-300 my-8 w-3/4 mx-auto"></div>
+      {/* Imagem para o Slide 3 - Tamanho reduzido */}
+      <div className="mt-10 flex justify-center">
+        <img
+          src="https://i.postimg.cc/PxnHw2Gw/11.jpg"
+          alt="Brinde de vocês dois"
+          className="rounded-xl shadow-lg w-64 h-auto object-cover animate-zoom-in"
+          onError={(e) => { e.target.onerror = null; e.target.src = 'https://placehold.co/600x400/FFF0F5/FFC0CB?text=Brinde+de+Taças'; }}
+        />
+      </div>
+    </section>,
+
+    // Slide 4: Delícias para o Coração e o Paladar
+    <section key="slide-4" className="w-full max-w-4xl bg-white rounded-3xl shadow-xl p-6 sm:p-10 transform transition-transform duration-500 hover:scale-105">
+      <h2 className="text-4xl sm:text-5xl font-bold text-red-600 mb-8 text-center font-display animate-fade-in">
+        Delícias para o Coração e o Paladar
+      </h2>
+
+      {/* Seção de Entrada */}
+      <div className="mb-10 p-6 bg-red-50 rounded-2xl shadow-inner border border-red-200">
+        <h3 className="text-2xl sm:text-3xl font-semibold text-pink-600 mb-4 flex items-center">
+          <span className="mr-3">🍽️</span> Entrada:
+        </h3>
+        <p className="text-lg sm:text-xl text-gray-700 leading-relaxed italic">
+        Bruschetta de Cogumelos
+          <br />
+          Fatias crocantes de pão artesanal cobertas com um rico refogado de cogumelos frescos, alho e ervas aromáticas.
+        </p>
+      </div>
+
+      {/* Seção de Prato Principal */}
+      <div className="p-6 bg-red-50 rounded-2xl shadow-inner border border-red-200">
+        <h3 className="text-2xl sm:text-3xl font-semibold text-pink-600 mb-4 flex items-center">
+          <span className="mr-3">🍝</span> Prato Principal:
+        </h3>
+        <p className="text-lg sm:text-xl text-gray-700 leading-relaxed italic">
+          Fettuccine ao Molho de Gorgonzola
+          <br />
+          Massa artesanal, servida em um molho aveludado de queijo gorgonzola, finalizado com um toque de noz-moscada e pimenta do reino moída na hora.
+        </p>
+      </div>
+    </section>,
+
+    // Slide 5: O Doce Final da Nossa Celebração
+    <section key="slide-5" className="w-full max-w-4xl bg-white rounded-3xl shadow-xl p-6 sm:p-10 transform transition-transform duration-500 hover:scale-105">
+      <h2 className="text-4xl sm:text-5xl font-bold text-red-600 mb-8 text-center font-display animate-fade-in">
+        O Doce Final da Nossa Celebração
+      </h2>
+
+      {/* Seção de Sobremesa */}
+      <div className="mb-10 p-6 bg-red-50 rounded-2xl shadow-inner border border-red-200">
+        <h3 className="text-2xl sm:text-3xl font-semibold text-pink-600 mb-4 flex items-center">
+          <span className="mr-3">🍰</span> Sobremesa:
+        </h3>
+        <p className="text-lg sm:text-xl text-gray-700 leading-relaxed italic">
+          Docin de Leite com Queijo
+          <br />
+          Uma união perfeita entre o doce de leite cremoso e o queijo, para renovar nossa carteirinha de mineiro.
+        </p>
+      </div>
+
+      <div className="text-center mt-12">
+        <p className="text-xl sm:text-2xl text-gray-700 mb-6 leading-relaxed">
+          Que este menu seja um convite para desfrutarmos juntos de cada sabor, em um dia tão significativo para nós.
+        </p>
+        <p className="text-3xl sm:text-4xl font-bold text-red-500 mb-8 font-display animate-pulse-love">
+          Te amo hoje e sempre, do tamanho desse dinossauro!
+        </p>
+        {/* Imagem para o Slide 5 */}
+        <div className="flex justify-center">
+          <img
+            src="https://i.postimg.cc/x8fxzb6Q/6.jpg"
+            alt="Amor Eterno"
+            className="rounded-xl shadow-lg w-full max-w-lg object-cover h-auto animate-zoom-in"
+            onError={(e) => { e.target.onerror = null; e.target.src = 'https://placehold.co/600x400/FFD1DC/FF69B4?text=Amor+Eterno'; }}
+          />
+        </div>
+      </div>
+    </section>,
+  ];
+
+  const goToNextSlide = () => {
+    setCurrentSlide((prevSlide) => (prevSlide + 1) % slides.length);
+  };
+
+  const goToPreviousSlide = () => {
+    setCurrentSlide((prevSlide) => (prevSlide - 1 + slides.length) % slides.length);
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-pink-100 via-rose-50 to-red-100 font-serif text-gray-800 p-4 sm:p-8 flex flex-col items-center">
+      {/* Slide Atual */}
+      {slides[currentSlide]}
+
+      {/* Botões de Navegação */}
+      <div className="flex justify-center mt-8 space-x-4">
+        <button
+          onClick={goToPreviousSlide}
+          className="px-6 py-3 bg-pink-500 text-white font-bold rounded-full shadow-lg hover:bg-pink-600 transition-colors duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
+          disabled={currentSlide === 0}
+        >
+          Anterior
+        </button>
+        <span className="text-lg font-semibold text-gray-700 flex items-center">
+          {currentSlide + 1} / {slides.length}
+        </span>
+        <button
+          onClick={goToNextSlide}
+          className="px-6 py-3 bg-red-500 text-white font-bold rounded-full shadow-lg hover:bg-red-600 transition-colors duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
+          disabled={currentSlide === slides.length - 1}
+        >
+          Próximo
+        </button>
+      </div>
+
+      {/* Estilos Personalizados */}
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Inter:wght@400;700&family=Playfair+Display:wght@700&display=swap');
+
+        .font-serif {
+          font-family: 'Inter', sans-serif; /* Fonte padrão */
+        }
+        .font-display {
+          font-family: 'Playfair Display', serif; /* Para títulos */
+        }
+        .font-handwriting {
+          font-family: 'Dancing Script', cursive; /* Para assinaturas/toques pessoais */
+        }
+
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(-10px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+          animation: fadeIn 1s ease-out forwards;
+        }
+
+        @keyframes zoomIn {
+          from { transform: scale(0.95); opacity: 0; }
+          to { transform: scale(1); opacity: 1; }
+        }
+        .animate-zoom-in {
+          animation: zoomIn 0.8s ease-out forwards;
+        }
+
+        @keyframes bounce {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-10px); }
+        }
+        .animate-bounce {
+          animation: bounce 1.5s infinite;
+        }
+
+        @keyframes pulse {
+          0%, 100% { transform: scale(1); }
+          50% { transform: scale(1.03); }
+        }
+        .animate-pulse {
+          animation: pulse 2s infinite;
+        }
+
+        @keyframes pulseLove {
+          0%, 100% { transform: scale(1); color: #ef4444; } /* red-500 */
+          50% { transform: scale(1.05); color: #ec4899; } /* pink-500 */
+        }
+        .animate-pulse-love {
+          animation: pulseLove 2s infinite ease-in-out;
+        }
+      `}</style>
+    </div>
+  );
+};
+
+export default App;
